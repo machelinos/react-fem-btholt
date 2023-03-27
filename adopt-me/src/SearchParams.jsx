@@ -50,7 +50,10 @@ const SearchParams = () => {
           <select
             id="animal"
             value={animal}
-            onChange={(e) => setAnimal(e.target.value)}
+            onChange={(e) => {
+              setAnimal(e.target.value);
+              setBreed("");
+            }}
           >
             <option />
             {ANIMALS.map((animal) => (
