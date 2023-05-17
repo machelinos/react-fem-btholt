@@ -23,8 +23,9 @@ const SearchParams = () => {
   const pets = result?.data?.pets ?? [];
 
   return (
-    <div className="search-params">
+    <div className="my-0 mx-auto w-11/12">
       <form
+        className="p-10 mb-10 rounded-lg bg-gray-200 shadow-lg flex flex-col justify-center items-center"
         onSubmit={(e) => {
           e.preventDefault();
           const formData = new FormData(e.target);
