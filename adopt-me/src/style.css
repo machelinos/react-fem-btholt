@@ -6,6 +6,24 @@
   .search-input {
     @apply w-60 mb-5 block;
   }
+
+  .loader {
+    font-size: 100px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .loading-pane {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 15px;
+  }
 }
 
 @layer utilities {
