@@ -12,6 +12,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "typecheck": "tsc --noEmit",
   "dependencies": {
     "@tanstack/react-query": "^4.28.0",
     "eslint": "^8.36.0",

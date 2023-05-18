@@ -5,15 +5,21 @@ import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import { lazy, useContext, useState } from "react";
 import AdoptedPetContext from "./AdoptedPetContext";
+import { Pet, PetAPIResponse } from "./APIResponsesTypes";
 
 const Modal = lazy(() => import("./Modal"));
 
 const Details = () => {
   const navigate = useNavigate();
-  const [, setAdoptedPet] = useContext(AdoptedPetContext);
+  const [, setAdoptedPet] =
+    useContext<[Pet, (adoptedPet: Pet) => void]>(AdoptedPetContext);
   const { id } = useParams();
-  const results = useQuery(["details", id], fetchPet);
+  const results = useQuery<PetAPIResponse>(["details", id], fetchPet);
   const [showModal, setShowModal] = useState(false);
+
+  if (!id) {
+    throw new Error("No ID provided to Details");
+  }
 
   if (results.isLoading) {
     return (
@@ -23,7 +29,11 @@ const Details = () => {
     );
   }
 
-  const pet = results.data.pets[0];
+  const pet = results?.data?.pets[0];
+
+  if (!pet) {
+    throw new Error("pet not found");
+  }
 
   return (
     <div className="details">
@@ -57,10 +67,10 @@ const Details = () => {
   );
 };
 
-export default function DetailsErrorBoundary(props) {
+export default function DetailsErrorBoundary() {
   return (
     <ErrorBoundary>
-      <Details {...props} />
+      <Details />
     </ErrorBoundary>
   );
 }
